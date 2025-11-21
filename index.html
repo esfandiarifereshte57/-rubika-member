@@ -1,192 +1,42 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!doctype html>
+<html lang="en" class="no-touch">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سیستم عضویت اجباری روبیکا</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container {
-            background: white;
-            max-width: 500px;
-            width: 100%;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-        .step {
-            display: none;
-            margin: 20px 0;
-        }
-        .active {
-            display: block;
-        }
-        .btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 10px;
-            transition: all 0.3s;
-        }
-        .btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        .btn-success {
-            background: #27ae60;
-        }
-        .btn-success:hover {
-            background: #219a52;
-        }
-        .channel-link {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 2px dashed #3498db;
-        }
-        .username-input {
-            width: 80%;
-            padding: 12px;
-            margin: 15px 0;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            text-align: center;
-        }
-        .loading {
-            display: none;
-            color: #3498db;
-            margin: 20px 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- مرحله 1: درخواست عضویت -->
-        <div id="step1" class="step active">
-            <h2>📱 برای ادامه باید عضو کانال ما شوید</h2>
-            <div class="channel-link">
-                <strong>آیدی کانال ما:</strong>
-                <br>
-                <span style="color: #3498db; font-size: 18px;">@YourChannelID</span>
-            </div>
-            <p>لطفاً روی لینک زیر کلیک کنید و عضو کانال شوید:</p>
-            <a href="rubika://your/channel/link" class="btn">
-                🔗 رفتن به کانال در روبیکا
-            </a>
-            <br>
-            <button class="btn btn-success" onclick="showStep(2)">
-                ✅ من عضو شدم (ادامه)
-            </button>
-        </div>
+  <meta charset="utf-8">
+  <title>پیام رسان وب روبیکا</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-        <!-- مرحله 2: وارد کردن آیدی -->
-        <div id="step2" class="step">
-            <h2>🔍 تأیید عضویت</h2>
-            <p>لطفاً آیدی روبیکای خود را وارد کنید:</p>
-            <input type="text" id="username" class="username-input" placeholder="مثال: @YourUsername">
-            <br>
-            <div id="loading" class="loading">
-                ⏳ در حال بررسی...
-            </div>
-            <button class="btn" onclick="checkMembership()">
-                🔄 بررسی عضویت
-            </button>
-        </div>
+  <link rel="apple-touch-icon" href="assets/img/iphone_home120.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/iphone_home120.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 320px)" href="assets/img/iphone_startup.png">
 
-        <!-- مرحله 3: موفقیت آمیز -->
-        <div id="step3" class="step">
-            <h2>🎉 تبریک!</h2>
-            <p>عضویت شما تأیید شد ✅</p>
-            <p>اکنون می‌توانید از خدمات ما استفاده کنید</p>
-            <button class="btn btn-success" onclick="accessService()">
-                🚀 دسترسی به سرویس
-            </button>
-        </div>
+  <meta name="apple-mobile-web-app-title" content="Rubika Web">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#497495">
+  <meta name="google" content="notranslate">
 
-        <!-- مرحله 4: خطا -->
-        <div id="step4" class="step">
-            <h2>❌ مشکل در تأیید</h2>
-            <p>متأسفانه نتوانستیم عضویت شما را تأیید کنیم.</p>
-            <p>لطفاً مطمئن شوید:</p>
-            <ul style="text-align: right; display: inline-block;">
-                <li>✅ عضو کانال شده‌اید</li>
-                <li>✅ آیدی را صحیح وارد کرده‌اید</li>
-                <li>✅ اینترنت متصل است</li>
-            </ul>
-            <br>
-            <button class="btn" onclick="showStep(1)">
-                🔄 تلاش مجدد
-            </button>
-        </div>
-    </div>
+  <meta property="og:title" content="Rubika Web">
+  <meta property="og:url" content="https://web.rubika.ir/">
+  <meta property="og:image:width" content="236">
+  <meta property="og:image:height" content="236">
+  <meta property="og:image" content="https://web.rubika.ir/assets/img/logo_share.png">
+  <meta property="og:site_name" content="Rubika Web">
+  <meta property="description" content="Welcome to the Web application of Rubika messenger.">
+  <meta property="og:description" content="Welcome to the Web application of Rubika messenger.">
 
-    <script>
-        function showStep(stepNumber) {
-            // مخفی کردن همه مراحل
-            document.querySelectorAll('.step').forEach(step => {
-                step.classList.remove('active');
-            });
-            // نمایش مرحله مورد نظر
-            document.getElementById('step' + stepNumber).classList.add('active');
-        }
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
+<link rel="stylesheet" href="styles.80cebaee1fe4b104cf0b.css"></head>
 
-        function checkMembership() {
-            const username = document.getElementById('username').value;
-            const loading = document.getElementById('loading');
-            
-            if (!username) {
-                alert('لطفاً آیدی خود را وارد کنید');
-                return;
-            }
+<body cz-shortcut-listen="true">
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+  <app-root></app-root>
+<script src="runtime-es2015.0dae8cbc97194c7caed4.js" type="module"></script><script src="runtime-es5.0dae8cbc97194c7caed4.js" nomodule defer></script><script src="polyfills-es5.05aa0759d051c85170bb.js" nomodule defer></script><script src="polyfills-es2015.c85079585bd3f2e42373.js" type="module"></script><script src="scripts.9fc52888a9a75ff81dc6.js" defer></script><script src="main-es2015.e8637c3de17f554dc8ff.js" type="module"></script><script src="main-es5.e8637c3de17f554dc8ff.js" nomodule defer></script></body>
 
-            // نمایش انیمیشن loading
-            loading.style.display = 'block';
-
-            // شبیه‌سازی بررسی عضویت (در واقعیت این قسمت باید به سرور متصل شود)
-            setTimeout(() => {
-                loading.style.display = 'none';
-                
-                // اینجا در حالت واقعی باید پاسخ سرور را بررسی کنید
-                // برای نمونه، ما تصادفی موفق/ناموفق می‌کنیم
-                const isMember = Math.random() > 0.3; // 70% شانس موفقیت
-                
-                if (isMember) {
-                    showStep(3); // موفقیت آمیز
-                } else {
-                    showStep(4); // خطا
-                }
-            }, 2000);
-        }
-
-        function accessService() {
-            alert('🚀 در حال انتقال به سرویس...\n\nاین قسمت بستگی به خدمات شما دارد.\nمثلاً:\n- دانلود فایل\n- مشاهده محتوای ویژه\n- شرکت در قرعه کشی');
-            // اینجا می‌توانید کاربر را به صفحه اصلی هدایت کنید
-            // window.location.href = 'your-service-page.html';
-        }
-
-        // باز کردن روبیکا هنگام کلیک روی لینک (اختیاری)
-        document.querySelector('a[href^="rubika://"]').addEventListener('click', function(e) {
-            setTimeout(() => {
-                // اگر بعد از 2 ثانیه کاربر برنگشت، پیام نشان بده
-                alert('اگر روبیکا باز نشد، لطفاً دستی آیدی کانال را جستجو کنید.');
-            }, 2000);
-        });
-    </script>
-</body>
 </html>
