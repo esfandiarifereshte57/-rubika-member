@@ -1,42 +1,1442 @@
-<!doctype html>
-<html lang="en" class="no-touch">
-
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>پیام رسان وب روبیکا</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acioai 1.0.0 | هوش مصنوعی تیم آکیو | Acio</title>
+    
+    <!-- فونت Vazirmatn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Reset و متغیرهای دقیق DeepSeek */
+        :root {
+            --deepseek-bg: #343541;
+            --deepseek-bg-secondary: #444654;
+            --deepseek-bg-tertiary: #40414f;
+            --deepseek-border: #565869;
+            --deepseek-text-primary: #ececf1;
+            --deepseek-text-secondary: #c5c5d2;
+            --deepseek-text-tertiary: #8e8ea0;
+            --deepseek-primary: #10a37f;
+            --deepseek-primary-hover: #0d8c6d;
+            --deepseek-user-message: #444654;
+            --deepseek-ai-message: #343541;
+            --deepseek-shadow: 0 0 15px rgba(0,0,0,0.3);
+            --deepseek-radius: 12px;
+            --deepseek-radius-sm: 6px;
+            --deepseek-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-  <link rel="apple-touch-icon" href="assets/img/iphone_home120.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/iphone_home120.png">
-  <link rel="apple-touch-startup-image" media="(device-width: 320px)" href="assets/img/iphone_startup.png">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <meta name="apple-mobile-web-app-title" content="Rubika Web">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#497495">
-  <meta name="google" content="notranslate">
+        html {
+            scroll-behavior: smooth;
+            height: 100%;
+        }
 
-  <meta property="og:title" content="Rubika Web">
-  <meta property="og:url" content="https://web.rubika.ir/">
-  <meta property="og:image:width" content="236">
-  <meta property="og:image:height" content="236">
-  <meta property="og:image" content="https://web.rubika.ir/assets/img/logo_share.png">
-  <meta property="og:site_name" content="Rubika Web">
-  <meta property="description" content="Welcome to the Web application of Rubika messenger.">
-  <meta property="og:description" content="Welcome to the Web application of Rubika messenger.">
+        body {
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--deepseek-bg);
+            color: var(--deepseek-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#1976d2">
-<link rel="stylesheet" href="styles.80cebaee1fe4b104cf0b.css"></head>
+        /* اسکرول بار */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
 
-<body cz-shortcut-listen="true">
-  <!--[if IE]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-  <![endif]-->
-  <app-root></app-root>
-<script src="runtime-es2015.0dae8cbc97194c7caed4.js" type="module"></script><script src="runtime-es5.0dae8cbc97194c7caed4.js" nomodule defer></script><script src="polyfills-es5.05aa0759d051c85170bb.js" nomodule defer></script><script src="polyfills-es2015.c85079585bd3f2e42373.js" type="module"></script><script src="scripts.9fc52888a9a75ff81dc6.js" defer></script><script src="main-es2015.e8637c3de17f554dc8ff.js" type="module"></script><script src="main-es5.e8637c3de17f554dc8ff.js" nomodule defer></script></body>
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
 
+        ::-webkit-scrollbar-thumb {
+            background: var(--deepseek-border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--deepseek-text-tertiary);
+        }
+
+        /* Layout اصلی */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* هدر */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--deepseek-bg);
+            border-bottom: 1px solid var(--deepseek-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .logo-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--deepseek-text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-subtitle {
+            font-size: 12px;
+            color: var(--deepseek-text-tertiary);
+            margin-top: -3px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* دکمه‌های هدر */
+        .header-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--deepseek-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--deepseek-transition);
+        }
+
+        .header-btn:hover {
+            background: var(--deepseek-bg-secondary);
+            color: var(--deepseek-text-primary);
+        }
+
+        /* بخش اصلی چت */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+            overflow: hidden;
+        }
+
+        /* کانتینر پیام‌ها */
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* پیام‌ها */
+        .message {
+            display: flex;
+            gap: 16px;
+            animation: messageAppear 0.3s ease-out;
+            padding: 8px 0;
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message.user .avatar {
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            color: white;
+        }
+
+        .message.ai .avatar {
+            background: transparent;
+        }
+
+        .message.ai .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.1);
+        }
+
+        .message-content {
+            flex: 1;
+            max-width: calc(100% - 48px);
+        }
+
+        .message-text {
+            padding: 16px;
+            border-radius: var(--deepseek-radius);
+            background: var(--deepseek-user-message);
+            font-size: 15px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-word;
+            border: 1px solid transparent;
+        }
+
+        .message.ai .message-text {
+            background: var(--deepseek-ai-message);
+            border: 1px solid var(--deepseek-border);
+        }
+
+        .message.user .message-text {
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            color: white;
+            border: none;
+        }
+
+        /* تایپینگ انیمیشن */
+        .typing-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 0;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--deepseek-text-tertiary);
+            animation: typingDot 1.4s infinite ease-in-out both;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingDot {
+            0%, 80%, 100% { 
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% { 
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* ناحیه ورود متن */
+        .input-container {
+            padding: 20px;
+            border-top: 1px solid var(--deepseek-border);
+            background: var(--deepseek-bg);
+            position: relative;
+        }
+
+        .input-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .message-input {
+            width: 100%;
+            min-height: 56px;
+            max-height: 200px;
+            padding: 16px 52px 16px 16px;
+            border: 1px solid var(--deepseek-border);
+            border-radius: var(--deepseek-radius);
+            background: var(--deepseek-bg);
+            color: var(--deepseek-text-primary);
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 15px;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+            transition: var(--deepseek-transition);
+        }
+
+        .message-input:focus {
+            border-color: var(--deepseek-primary);
+            box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
+        }
+
+        .message-input::placeholder {
+            color: var(--deepseek-text-tertiary);
+        }
+
+        .message-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .send-button {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: none;
+            background: var(--deepseek-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--deepseek-transition);
+            opacity: 0.8;
+        }
+
+        .send-button:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* کووتا */
+        .quota-container {
+            max-width: 800px;
+            margin: 0 auto 10px;
+            padding: 0 20px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--deepseek-text-tertiary);
+        }
+
+        .quota-text {
+            background: var(--deepseek-bg-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            border: 1px solid var(--deepseek-border);
+        }
+
+        .quota-warning {
+            color: #ef4444;
+            font-weight: 500;
+        }
+
+        /* پروفایل کاربر */
+        .profile-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background: var(--deepseek-bg);
+            border-radius: var(--deepseek-radius);
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--deepseek-border);
+            box-shadow: var(--deepseek-shadow);
+            overflow: hidden;
+        }
+
+        .profile-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--deepseek-border);
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .profile-subscription {
+            color: var(--deepseek-primary);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 4px 12px;
+            background: rgba(16, 163, 127, 0.1);
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .profile-details {
+            padding: 24px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--deepseek-border);
+        }
+
+        .profile-label {
+            color: var(--deepseek-text-secondary);
+            font-size: 14px;
+        }
+
+        .profile-value {
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        /* پشتیبانی */
+        .support-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .support-card {
+            background: var(--deepseek-bg);
+            border-radius: var(--deepseek-radius);
+            width: 100%;
+            max-width: 600px;
+            height: 80vh;
+            border: 1px solid var(--deepseek-border);
+            box-shadow: var(--deepseek-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .support-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--deepseek-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .support-title {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .support-message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+
+        .support-message.user {
+            align-self: flex-end;
+            background: var(--deepseek-primary);
+            color: white;
+        }
+
+        .support-message.admin {
+            align-self: flex-start;
+            background: var(--deepseek-bg-secondary);
+            border: 1px solid var(--deepseek-border);
+        }
+
+        .support-admin-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .admin-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .admin-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--deepseek-primary);
+        }
+
+        .admin-badge {
+            color: #3b82f6;
+            font-size: 12px;
+        }
+
+        .support-input-area {
+            padding: 20px;
+            border-top: 1px solid var(--deepseek-border);
+        }
+
+        /* تبلیغات */
+        .ad-container {
+            max-width: 800px;
+            margin: 10px auto;
+            padding: 0 20px;
+        }
+
+        .ad-card {
+            background: linear-gradient(135deg, var(--deepseek-bg-secondary), var(--deepseek-bg-tertiary));
+            border-radius: var(--deepseek-radius);
+            padding: 16px;
+            border: 1px solid var(--deepseek-border);
+            cursor: pointer;
+            transition: var(--deepseek-transition);
+        }
+
+        .ad-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--deepseek-shadow);
+        }
+
+        .ad-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .ad-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .ad-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .ad-description {
+            color: var(--deepseek-text-secondary);
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .ad-button {
+            width: 100%;
+            padding: 10px;
+            background: var(--deepseek-primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--deepseek-transition);
+        }
+
+        .ad-button:hover {
+            background: var(--deepseek-primary-hover);
+        }
+
+        /* اعلان‌ها */
+        .notification {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 12px 20px;
+            background: var(--deepseek-bg);
+            border: 1px solid var(--deepseek-border);
+            border-radius: var(--deepseek-radius-sm);
+            box-shadow: var(--deepseek-shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .notification.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .notification.warning {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .notification.info {
+            border-left: 4px solid var(--deepseek-primary);
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 16px;
+            }
+            
+            .messages-container {
+                padding: 16px;
+                gap: 16px;
+            }
+            
+            .message-text {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .input-container {
+                padding: 16px;
+            }
+            
+            .support-message {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-controls {
+                gap: 8px;
+            }
+            
+            .header-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-text {
+                font-size: 14px;
+            }
+            
+            .logo-subtitle {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai Logo">
+            </div>
+            <div>
+                <div class="logo-text">Acioai 1.0.0</div>
+                <div class="logo-subtitle">ساخته‌شده توسط تیم آکیو | Acio</div>
+            </div>
+        </div>
+        <div class="header-controls">
+            <button class="header-btn" id="supportBtn" title="پشتیبانی">
+                <i class="fas fa-headset"></i>
+            </button>
+            <button class="header-btn" id="profileBtn" title="پروفایل">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- بخش اصلی چت -->
+    <div class="main-content">
+        <!-- تبلیغات -->
+        <div class="ad-container" id="adContainer">
+            <!-- تبلیغات از API لود می‌شوند -->
+        </div>
+
+        <!-- کووتا -->
+        <div class="quota-container" id="quotaContainer">
+            <div class="quota-text" id="quotaText">پیام‌های باقی‌مانده امروز: 24</div>
+        </div>
+
+        <!-- کانتینر پیام‌ها -->
+        <div class="messages-container" id="messagesContainer">
+            <!-- پیام اولیه -->
+            <div class="message ai">
+                <div class="avatar">
+                    <img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai">
+                </div>
+                <div class="message-content">
+                    <div class="message-text">
+                        سلام! 👋 من Acioai هستم، هوش مصنوعی توسعه‌یافته توسط تیم آکیو | Acio.
+                        چطور می‌تونم کمکتون کنم؟
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ناحیه ورود متن -->
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea 
+                    class="message-input" 
+                    id="messageInput" 
+                    placeholder="پیام خود را اینجا بنویسید..."
+                    rows="1"
+                    autocomplete="off"
+                ></textarea>
+                <button class="send-button" id="sendButton">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- پروفایل کاربر -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar">A</div>
+                <h3 class="profile-name" id="profileName">کاربر</h3>
+                <div class="profile-subscription" id="profileSubscription">Free</div>
+            </div>
+            <div class="profile-details">
+                <div class="profile-item">
+                    <span class="profile-label">سطح اشتراک</span>
+                    <span class="profile-value" id="subscriptionLevel">Free</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">پیام مجاز روزانه</span>
+                    <span class="profile-value" id="dailyLimit">25</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">پیام باقی‌مانده</span>
+                    <span class="profile-value" id="remainingMessages">24</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">وضعیت حافظه</span>
+                    <span class="profile-value" id="memoryStatus">غیرفعال</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">شناسه کاربر</span>
+                    <span class="profile-value" id="userId">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- پشتیبانی -->
+    <div class="support-modal" id="supportModal">
+        <div class="support-card">
+            <div class="support-header">
+                <h3 class="support-title">
+                    <i class="fas fa-headset"></i>
+                    چت با پشتیبانی
+                </h3>
+                <button class="header-btn" id="closeSupportModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="support-messages" id="supportMessages">
+                <div class="support-message admin">
+                    <div class="support-admin-header">
+                        <div class="admin-avatar">A</div>
+                        <span class="admin-name">Admin</span>
+                        <i class="fas fa-check-circle admin-badge"></i>
+                    </div>
+                    <div>سلام! 👋 چطور می‌تونم کمکتون کنم؟</div>
+                </div>
+            </div>
+            <div class="support-input-area">
+                <div class="input-wrapper">
+                    <textarea 
+                        class="message-input" 
+                        id="supportInput" 
+                        placeholder="پیام خود را برای پشتیبانی بنویسید..."
+                        rows="2"
+                    ></textarea>
+                    <button class="send-button" id="sendSupportButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- اعلان‌ها -->
+    <div id="notificationContainer"></div>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbxiq1R7JoKZ_zfOCHwVwmCzZrkV43Kp_hZnDyVkF3zFCCBnVWLylQ-fQAio_xHL4Srd/exec';
+        
+        // Application State
+        let currentUser = null;
+        let isTyping = false;
+        let messageCount = 0;
+        let dailyLimit = 25;
+        let supportInterval = null;
+        let updateInterval = null;
+
+        // DOM Elements
+        const elements = {
+            messagesContainer: document.getElementById('messagesContainer'),
+            messageInput: document.getElementById('messageInput'),
+            sendButton: document.getElementById('sendButton'),
+            quotaText: document.getElementById('quotaText'),
+            quotaContainer: document.getElementById('quotaContainer'),
+            profileModal: document.getElementById('profileModal'),
+            supportModal: document.getElementById('supportModal'),
+            profileBtn: document.getElementById('profileBtn'),
+            supportBtn: document.getElementById('supportBtn'),
+            closeSupportModal: document.getElementById('closeSupportModal'),
+            supportMessages: document.getElementById('supportMessages'),
+            supportInput: document.getElementById('supportInput'),
+            sendSupportButton: document.getElementById('sendSupportButton'),
+            profileAvatar: document.getElementById('profileAvatar'),
+            profileName: document.getElementById('profileName'),
+            profileSubscription: document.getElementById('profileSubscription'),
+            subscriptionLevel: document.getElementById('subscriptionLevel'),
+            dailyLimit: document.getElementById('dailyLimit'),
+            remainingMessages: document.getElementById('remainingMessages'),
+            memoryStatus: document.getElementById('memoryStatus'),
+            userId: document.getElementById('userId'),
+            adContainer: document.getElementById('adContainer'),
+            notificationContainer: document.getElementById('notificationContainer')
+        };
+
+        // Initialize Application
+        function init() {
+            loadUser();
+            setupEventListeners();
+            setupMessageInput();
+            checkDailyLimit();
+            startUpdateInterval();
+            loadAds();
+        }
+
+        // Load User from localStorage
+        function loadUser() {
+            const userData = localStorage.getItem('acioai_user');
+            if (userData) {
+                try {
+                    currentUser = JSON.parse(userData);
+                    updateQuotaDisplay();
+                    updateProfile();
+                } catch (error) {
+                    localStorage.removeItem('acioai_user');
+                }
+            }
+        }
+
+        // API Communication
+        async function apiRequest(action, params = {}) {
+            const url = new URL(API_BASE_URL);
+            url.searchParams.append('action', action);
+            
+            Object.entries(params).forEach(([key, value]) => {
+                if (value) url.searchParams.append(key, value);
+            });
+            
+            try {
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.ok && data.error) {
+                    throw new Error(data.error);
+                }
+                
+                return data;
+            } catch (error) {
+                console.error('API Request Error:', error);
+                handleError(error.message);
+                throw error;
+            }
+        }
+
+        // Send Message to AI
+        async function sendMessage(text) {
+            if (!text.trim() || !currentUser || isTyping || messageCount >= dailyLimit) return;
+            
+            // Clear input and disable
+            elements.messageInput.value = '';
+            updateSendButton();
+            
+            // Add user message
+            addMessage(text, 'user');
+            messageCount++;
+            updateQuotaDisplay();
+            
+            // Show typing indicator
+            const typingId = showTypingIndicator();
+            
+            try {
+                isTyping = true;
+                elements.sendButton.disabled = true;
+                
+                // Send to API
+                const response = await apiRequest('chat', {
+                    userid: currentUser.id,
+                    name: currentUser.name,
+                    text: text
+                });
+                
+                // Remove typing indicator
+                removeTypingIndicator(typingId);
+                
+                // Type response character by character
+                await typeMessage(response.Result || 'پاسخی دریافت نشد', 'ai');
+                
+                // Load ads every 5 messages
+                if (messageCount % 5 === 0) {
+                    loadAds();
+                }
+                
+            } catch (error) {
+                removeTypingIndicator(typingId);
+                addMessage('متأسفانه در دریافت پاسخ مشکلی پیش آمد. لطفاً مجدداً تلاش کنید.', 'ai');
+            } finally {
+                isTyping = false;
+                elements.sendButton.disabled = false;
+                elements.messageInput.focus();
+            }
+        }
+
+        // Send Support Message
+        async function sendSupportMessage(text) {
+            if (!text.trim() || !currentUser) return;
+            
+            try {
+                // Add user message to support chat
+                addSupportMessage(text, 'user');
+                
+                // Send to API
+                await apiRequest('support_send', {
+                    userid: currentUser.id,
+                    message: text
+                });
+                
+                elements.supportInput.value = '';
+                showNotification('پیام شما ارسال شد', 'info');
+                
+            } catch (error) {
+                showNotification('خطا در ارسال پیام', 'error');
+            }
+        }
+
+        // Fetch Support Messages
+        async function fetchSupportMessages() {
+            if (!currentUser) return;
+            
+            try {
+                const data = await apiRequest('support_fetch', {
+                    userid: currentUser.id
+                });
+                
+                if (data.Result && data.Result.messages) {
+                    updateSupportMessages(data.Result.messages);
+                }
+            } catch (error) {
+                console.error('Failed to fetch support messages:', error);
+            }
+        }
+
+        // Load Ads
+        async function loadAds() {
+            try {
+                const data = await apiRequest('ads');
+                
+                if (data.Result && data.Result.ads) {
+                    displayAds(data.Result.ads);
+                }
+            } catch (error) {
+                console.error('Failed to load ads:', error);
+            }
+        }
+
+        // Message Functions
+        function addMessage(text, type = 'ai') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const avatar = type === 'ai' 
+                ? '<div class="avatar"><img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai"></div>'
+                : '<div class="avatar">' + (currentUser?.name?.charAt(0) || 'U') + '</div>';
+            
+            messageDiv.innerHTML = `
+                ${avatar}
+                <div class="message-content">
+                    <div class="message-text">${formatMessage(text)}</div>
+                </div>
+            `;
+            
+            elements.messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+            
+            return messageDiv;
+        }
+
+        async function typeMessage(text, type = 'ai') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const avatar = type === 'ai' 
+                ? '<div class="avatar"><img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai"></div>'
+                : '<div class="avatar">' + (currentUser?.name?.charAt(0) || 'U') + '</div>';
+            
+            messageDiv.innerHTML = `
+                ${avatar}
+                <div class="message-content">
+                    <div class="message-text"></div>
+                </div>
+            `;
+            
+            elements.messagesContainer.appendChild(messageDiv);
+            
+            const textElement = messageDiv.querySelector('.message-text');
+            const chars = text.split('');
+            let currentText = '';
+            
+            // Type character by character
+            for (let i = 0; i < chars.length; i++) {
+                currentText += chars[i];
+                textElement.innerHTML = formatMessage(currentText);
+                
+                // Random typing speed for natural feel
+                await delay(Math.random() * 20 + 10);
+                
+                // Scroll to bottom every few characters
+                if (i % 5 === 0) {
+                    scrollToBottom();
+                }
+            }
+            
+            scrollToBottom();
+            return messageDiv;
+        }
+
+        function showTypingIndicator() {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ai';
+            messageDiv.id = 'typing-indicator';
+            
+            messageDiv.innerHTML = `
+                <div class="avatar">
+                    <img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai">
+                </div>
+                <div class="message-content">
+                    <div class="message-text">
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            elements.messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+            
+            return messageDiv.id;
+        }
+
+        function removeTypingIndicator(id) {
+            const indicator = document.getElementById(id);
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        function addSupportMessage(text, type = 'user') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `support-message ${type}`;
+            
+            if (type === 'user') {
+                messageDiv.innerHTML = `<div>${text}</div>`;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="support-admin-header">
+                        <div class="admin-avatar">A</div>
+                        <span class="admin-name">Admin</span>
+                        <i class="fas fa-check-circle admin-badge"></i>
+                    </div>
+                    <div>${text}</div>
+                `;
+            }
+            
+            elements.supportMessages.appendChild(messageDiv);
+            elements.supportMessages.scrollTop = elements.supportMessages.scrollHeight;
+            
+            return messageDiv;
+        }
+
+        // Display Ads
+        function displayAds(ads) {
+            if (!ads || ads.length === 0) {
+                elements.adContainer.classList.add('hidden');
+                return;
+            }
+            
+            elements.adContainer.classList.remove('hidden');
+            
+            const ad = ads[0]; // نمایش اولین تبلیغ
+            elements.adContainer.innerHTML = `
+                <div class="ad-card" onclick="window.open('${ad.link}', '_blank')">
+                    <div class="ad-header">
+                        <div class="ad-icon">
+                            <i class="fas fa-megaphone"></i>
+                        </div>
+                        <div class="ad-title">${ad.title}</div>
+                    </div>
+                    <div class="ad-description">${ad.description}</div>
+                    <button class="ad-button">مشاهده</button>
+                </div>
+            `;
+        }
+
+        // Update Functions
+        function updateQuotaDisplay() {
+            const remaining = dailyLimit - messageCount;
+            elements.quotaText.textContent = `پیام‌های باقی‌مانده امروز: ${remaining}`;
+            
+            if (remaining <= 0) {
+                elements.quotaText.classList.add('quota-warning');
+                elements.quotaText.textContent = 'سهمیه پیام روزانه شما به پایان رسیده است';
+                elements.messageInput.disabled = true;
+                elements.messageInput.placeholder = 'سهمیه روزانه تمام شد';
+            } else {
+                elements.quotaText.classList.remove('quota-warning');
+                elements.messageInput.disabled = false;
+            }
+        }
+
+        function updateProfile() {
+            if (!currentUser) return;
+            
+            elements.profileName.textContent = currentUser.name;
+            elements.profileAvatar.textContent = currentUser.name.charAt(0);
+            elements.userId.textContent = currentUser.id;
+            
+            // اطلاعات دمو
+            elements.subscriptionLevel.textContent = 'Free';
+            elements.profileSubscription.textContent = 'Free';
+            elements.dailyLimit.textContent = '25';
+            elements.remainingMessages.textContent = (25 - messageCount).toString();
+            elements.memoryStatus.textContent = 'غیرفعال';
+        }
+
+        function updateSupportMessages(messages) {
+            // پیاده‌سازی آپدیت پیام‌های پشتیبانی
+        }
+
+        // UI Helpers
+        function scrollToBottom() {
+            requestAnimationFrame(() => {
+                elements.messagesContainer.scrollTop = elements.messagesContainer.scrollHeight;
+            });
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            notification.innerHTML = `
+                <div class="notification-text">${message}</div>
+            `;
+            
+            elements.notificationContainer.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => notification.classList.add('show'), 10);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function updateSendButton() {
+            const hasText = elements.messageInput.value.trim().length > 0;
+            elements.sendButton.disabled = !hasText || isTyping || messageCount >= dailyLimit;
+        }
+
+        function setupMessageInput() {
+            elements.messageInput.addEventListener('input', () => {
+                // Auto-resize textarea
+                elements.messageInput.style.height = 'auto';
+                elements.messageInput.style.height = Math.min(elements.messageInput.scrollHeight, 200) + 'px';
+                
+                updateSendButton();
+            });
+            
+            elements.messageInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (!isTyping && elements.messageInput.value.trim() && messageCount < dailyLimit) {
+                        sendMessage(elements.messageInput.value.trim());
+                    }
+                }
+            });
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Send message
+            elements.sendButton.addEventListener('click', () => {
+                if (!isTyping && elements.messageInput.value.trim() && messageCount < dailyLimit) {
+                    sendMessage(elements.messageInput.value.trim());
+                }
+            });
+            
+            // Profile modal
+            elements.profileBtn.addEventListener('click', () => {
+                elements.profileModal.style.display = 'flex';
+                updateProfile();
+            });
+            
+            // Support modal
+            elements.supportBtn.addEventListener('click', () => {
+                if (!currentUser) {
+                    showNotification('لطفاً ابتدا وارد شوید', 'error');
+                    return;
+                }
+                elements.supportModal.style.display = 'flex';
+                elements.supportInput.focus();
+                startSupportPolling();
+            });
+            
+            elements.closeSupportModal.addEventListener('click', () => {
+                elements.supportModal.style.display = 'none';
+                stopSupportPolling();
+            });
+            
+            // Close modals on outside click
+            [elements.profileModal, elements.supportModal].forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                        if (modal === elements.supportModal) {
+                            stopSupportPolling();
+                        }
+                    }
+                });
+            });
+            
+            // Send support message
+            elements.sendSupportButton.addEventListener('click', () => {
+                if (elements.supportInput.value.trim()) {
+                    sendSupportMessage(elements.supportInput.value.trim());
+                }
+            });
+            
+            elements.supportInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (elements.supportInput.value.trim()) {
+                        sendSupportMessage(elements.supportInput.value.trim());
+                    }
+                }
+            });
+        }
+
+        // Support Polling
+        function startSupportPolling() {
+            supportInterval = setInterval(fetchSupportMessages, 10000); // هر 10 ثانیه
+        }
+
+        function stopSupportPolling() {
+            if (supportInterval) {
+                clearInterval(supportInterval);
+                supportInterval = null;
+            }
+        }
+
+        // Update Interval (هر 1 ثانیه)
+        function startUpdateInterval() {
+            updateInterval = setInterval(() => {
+                // آپدیت کووتا و دیگر اطلاعات
+                updateQuotaDisplay();
+            }, 1000);
+        }
+
+        // Utility Functions
+        function formatMessage(text) {
+            return text
+                .replace(/\n/g, '<br>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function checkDailyLimit() {
+            const today = new Date().toDateString();
+            const lastReset = localStorage.getItem('acioai_last_reset');
+            
+            if (lastReset !== today) {
+                messageCount = 0;
+                localStorage.setItem('acioai_last_reset', today);
+                localStorage.setItem('acioai_message_count', '0');
+            } else {
+                const savedCount = localStorage.getItem('acioai_message_count');
+                messageCount = savedCount ? parseInt(savedCount) : 0;
+            }
+            
+            updateQuotaDisplay();
+        }
+
+        function handleError(error) {
+            let message = 'خطا در ارتباط با سرور';
+            
+            if (error.includes('DAILY_LIMIT')) {
+                message = 'سهمیه پیام روزانه شما تمام شده است';
+                messageCount = dailyLimit;
+                updateQuotaDisplay();
+            } else if (error.includes('NETWORK')) {
+                message = 'اتصال اینترنت خود را بررسی کنید';
+            } else if (error.includes('SYSTEM_OFFLINE')) {
+                message = 'سیستم موقتاً در دسترس نیست';
+            }
+            
+            showNotification(message, 'error');
+        }
+
+        // Save message count to localStorage
+        function saveMessageCount() {
+            localStorage.setItem('acioai_message_count', messageCount.toString());
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+        
+        // Save message count before unload
+        window.addEventListener('beforeunload', saveMessageCount);
+    </script>
+</body>
 </html>
